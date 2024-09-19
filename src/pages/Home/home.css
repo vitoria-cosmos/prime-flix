@@ -1,0 +1,50 @@
+.lista-filmes {
+    max-width: 800px;
+    margin: 14px auto;
+    /* a margin dos lados vai deixar o elemento centralizado */
+}
+
+.lista-filmes article {
+    width: 100%;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.lista-filmes strong {
+    margin-bottom: 14px;
+    text-align: center;
+    font-size: 22px;
+    display: block;
+    /* o display block para poder aplicar o text-align e a margin*/
+}
+
+.lista-filmes img {
+    width: 900px;
+    max-width: 100%;
+    max-height: 340px;
+
+    /* ajustando o tamanho da imagem para que ela se encaixe ccom o tamanho que passamos anteriormente*/
+    object-fit: cover;
+
+    /* faz com que junte o a imagem com o elemento posterior */
+    display: block;
+
+    /* arredonda a borda da imagem, mas somente encima */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+}
+
+.lista-filmes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    font-size: 24px;
+    background-color: #116feb;
+    text-decoration: none;
+    color: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
