@@ -15,9 +15,12 @@ import './home.css';
 function Home() {
 
     const [filmes, setFilmes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    // vai ser um componente que vai aparecer antes do conteúdo aparecer na tela
 
     useEffect(() => {
         // vamos buscar a nossa api
+        // o useEffect traz algo asincrono, algo que não vem de imediato
         async function loadFilmes() {
             const response = await api.get("movie/now_playing", {
                 params: {
@@ -49,8 +52,20 @@ function Home() {
 
         loadFilmes();
 
+        setLoading(false);
+        // vai fazer com que o loading não apareça mais quando o conteúdo carregar
+
     }, []);
     // toda vez que a nossa aplicação abrir, ele vai chamar o useEffect
+
+    if (loading) {
+        return (
+            <div className='loading'>
+                <h2>Carregando filmes...</h2>
+            </div>
+        )
+    }
+    // ele só renderiza esse componente loading quando estiver true
 
     return (
         <div className='container'>
