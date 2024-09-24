@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; 
+import { useParams, useNavigate } from 'react-router-dom'; 
 
 // acessando nosso arquivo para fazer requisições para a api
 import api from '../../services/api';
 
 import './filme-info.css';
+
+
 
 function Filme() {
 
@@ -15,6 +17,9 @@ function Filme() {
     // essa state é para armazenar o data da requisição
 
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
+    // navigate também é um hook, faz com que possamos redirecionar o usuário para outra página
 
     // aqui vamos fazer uma requisição para que possamos acessar os dados de cada filme conforme o seu id
     useEffect(() => {
@@ -36,6 +41,11 @@ function Filme() {
             // se der errado, ele cai em um catch. No caso, a pessoa pode ter colocado um id na url que não existe.
             .catch(() => {
                 console.log('FILME NÃO ENCONTRADO');
+                navigate('/', { replace: true});
+                // eu vou redirecionar o usuário para a página home
+
+                return;
+                // vai parar a execução do código
             })
 
         }
@@ -46,7 +56,9 @@ function Filme() {
         return () => {
             console.log('COMPONENTE FOI DESMONTADO');
         }
-    }, []);
+    }, [navigate, id]);
+    // quando estammos utilizando o useEffect com hooks dentro, temos que declará-los dentro dos colchetes
+    // temos que passá-los como dependencias do useEffect
 
     if(loading) {
         return (
@@ -68,9 +80,12 @@ function Filme() {
             <div className='area-buttons'>
                 <button>Salvar</button>
                 <button>
-                    <a href='#'>
+                    {/* aqui estamos fazendo uma busca no youtube de acordo com o titulo do filme */}
+                    <a target='_blank' rel='external' href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
                         Trailer
                     </a>
+                    {/* o atributo target é para que a url seja aberta em outra aba */}
+                    {/* o atributo rel significa que é um link externo e não temos controle sobre ele */}
                 </button>
 
             </div>
