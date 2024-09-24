@@ -60,6 +60,33 @@ function Filme() {
     // quando estammos utilizando o useEffect com hooks dentro, temos que declará-los dentro dos colchetes
     // temos que passá-los como dependencias do useEffect
 
+    function salvarFilme() {
+        // alert('TESTE');
+        const minhaLista = localStorage.getItem('@primeflix');
+        // vai pegar a lista de filmes salvos
+
+        let filmesSalvos = JSON.parse(minhaLista) || [];
+        // aqui estamos transformando a string em lista. Se não houver lista, vamos começar com uma lista vazia
+
+        // Lógica para não salvar filmes duplicados
+        // o some verifica se tem pelo menos um item que voce quer procurar
+        // aqui vamos ver se já tem um filme salvo com o mesmo id
+        const hasFilme = filmesSalvos.some((filmesSalvo) => filmesSalvo.id === filme.id )
+        // Essa variável retorna true ou false
+
+        if (hasFilme) {
+            alert('ESSE FILME JÁ ESTÁ NA LISTA');
+            return;
+        }
+
+        // SALVAR O NOSSO OBJETO NA LISTA
+        filmesSalvos.push(filme);
+        localStorage.setItem('@primeflix', JSON.stringify(filmesSalvos));
+        // aqui estamos trnsformando a lista em string, pois não conseguimos salvar uma array no localStorage
+
+        alert('FILME SALVO COM SUCESSO!');
+    }
+
     if(loading) {
         return (
             <div className='filme-info'>
@@ -78,14 +105,15 @@ function Filme() {
             <strong>Avaliação {filme.vote_average} / 10</strong>
 
             <div className='area-buttons'>
-                <button>Salvar</button>
+                <button onClick={salvarFilme}>Salvar</button>
                 <button>
                     {/* aqui estamos fazendo uma busca no youtube de acordo com o titulo do filme */}
-                    <a target='_blank' rel='external' href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
+                    <a target='blank' rel='external' href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
                         Trailer
                     </a>
                     {/* o atributo target é para que a url seja aberta em outra aba */}
                     {/* o atributo rel significa que é um link externo e não temos controle sobre ele */}
+                    {/* colocar só o blanck é mais seguro */}
                 </button>
 
             </div>
