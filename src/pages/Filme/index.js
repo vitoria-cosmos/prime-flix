@@ -6,6 +6,8 @@ import api from '../../services/api';
 
 import './filme-info.css';
 
+import { toast } from 'react-toastify';
+
 
 
 function Filme() {
@@ -77,7 +79,8 @@ function Filme() {
         // Essa variável retorna true ou false
 
         if (hasFilme) {
-            alert('ESSE FILME JÁ ESTÁ NA LISTA');
+            // alert('ESSE FILME JÁ ESTÁ NA LISTA');
+            toast.warn('Esse filme já está na sua lista!')
             return;
         }
 
@@ -86,7 +89,8 @@ function Filme() {
         localStorage.setItem('@primeflix', JSON.stringify(filmesSalvos));
         // aqui estamos trnsformando a lista em string, pois não conseguimos salvar uma array no localStorage
 
-        alert('FILME SALVO COM SUCESSO!');
+        // alert('FILME SALVO COM SUCESSO!');
+        toast.success('Filme salvo com sucesso!');
     }
 
     if(loading) {
