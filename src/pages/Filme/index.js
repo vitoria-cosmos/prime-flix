@@ -43,6 +43,7 @@ function Filme() {
                 console.log('FILME NÃO ENCONTRADO');
                 navigate('/', { replace: true});
                 // eu vou redirecionar o usuário para a página home
+                // o replace serve para redirecionar o usuário
 
                 return;
                 // vai parar a execução do código
@@ -59,6 +60,7 @@ function Filme() {
     }, [navigate, id]);
     // quando estammos utilizando o useEffect com hooks dentro, temos que declará-los dentro dos colchetes
     // temos que passá-los como dependencias do useEffect
+    // estamos utilizando o useEffcet com dependencias externas para ele poder funcionar
 
     function salvarFilme() {
         // alert('TESTE');
@@ -113,7 +115,7 @@ function Filme() {
                     </a>
                     {/* o atributo target é para que a url seja aberta em outra aba */}
                     {/* o atributo rel significa que é um link externo e não temos controle sobre ele */}
-                    {/* colocar só o blanck é mais seguro */}
+                    {/* colocar só o blank é mais seguro */}
                 </button>
 
             </div>
